@@ -7,8 +7,7 @@ const app = express();
 app.use(cors()); // Allow all origins for debugging
 app.use(express.json());
 
-// Serve static images from local folder
-app.use('/images', express.static('C:/kantinku - update/frontend/public/images'));
+// Serve uploaded files
 app.use('/uploads', express.static('uploads'));
 
 // Routes
