@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import api from '../../api/axios';
+import { API_URL } from '../../config';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from '../../components/Toast';
@@ -84,7 +85,7 @@ export default function KedaiDetail() {
       {/* Banner */}
       <div style={{ height: 380, position: 'relative', overflow: 'hidden' }}>
         <img 
-          src={data.image_url?.startsWith('/uploads/') ? `http://localhost:5000${data.image_url}` : (data.image_url || '/images/kedai_budi.png')} 
+          src={data.image_url?.startsWith('/uploads/') ? `${API_URL}${data.image_url}` : (data.image_url || '/images/kedai_budi.png')} 
           alt={data.name} 
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%' }} 
           onError={(e) => { e.target.src = '/images/kedai_bakso.png'; }}
@@ -152,7 +153,7 @@ export default function KedaiDetail() {
                   <div key={item.id} className="menu-card">
                     <div className="menu-card-img">
                       <img 
-                        src={item.image_url?.startsWith('/uploads/') ? `http://localhost:5000${item.image_url}` : (item.image_url || '/images/menu_nasi_goreng.png')} 
+                        src={item.image_url?.startsWith('/uploads/') ? `${API_URL}${item.image_url}` : (item.image_url || '/images/menu_nasi_goreng.png')} 
                         alt={item.name} 
                         onError={(e) => { e.target.src = '/images/menu_nasi_goreng.png'; }}
                       />

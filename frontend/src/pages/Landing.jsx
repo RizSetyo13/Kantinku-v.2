@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import { API_URL } from '../config';
 import { useAuth } from '../context/AuthContext';
 import WebsiteReviews from '../components/WebsiteReviews';
 import { Rocket, Flame, Star, MapPin, Search, ShoppingCart, Target, Layers } from 'lucide-react';
@@ -156,7 +157,7 @@ export default function Landing() {
                 <Link to={`/kedai/${k.id}`} key={k.id} className="kedai-card">
                   <div className="kedai-card-img">
                     <img 
-                      src={k.image_url?.startsWith('/uploads/') ? `http://localhost:5000${k.image_url}` : (k.image_url || (k.name.includes('Budi') ? '/images/kedai_budi.png' : k.name.includes('Sari') ? '/images/kedai_sari.png' : k.name.includes('Joko') ? '/images/kedai_joko.png' : '/images/kedai_bakso.png'))} 
+                      src={k.image_url?.startsWith('/uploads/') ? `${API_URL}${k.image_url}` : (k.image_url || (k.name.includes('Budi') ? '/images/kedai_budi.png' : k.name.includes('Sari') ? '/images/kedai_sari.png' : k.name.includes('Joko') ? '/images/kedai_joko.png' : '/images/kedai_bakso.png'))} 
                       alt={k.name} 
                       onError={(e) => { e.target.src = '/images/kedai_bakso.png'; }}
                     />

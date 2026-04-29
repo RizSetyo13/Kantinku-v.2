@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import api from '../../api/axios';
+import { API_URL } from '../../config';
 import { MapPin, Search, Flame, Star, Coffee, Utensils, Pizza, Apple, Cake, Soup, IceCream } from 'lucide-react';
 
 const AREA_ICONS = [<MapPin size={14} />, <MapPin size={14} />, <MapPin size={14} />, <MapPin size={14} />, <MapPin size={14} />, <MapPin size={14} />, <MapPin size={14} />];
@@ -145,7 +146,7 @@ export default function CustomerHome() {
                 <Link to={`/kedai/${k.id}`} key={k.id} className="kedai-card">
                   <div className="kedai-card-img">
                     <img
-                      src={k.image_url?.startsWith('/uploads/') ? `http://localhost:5000${k.image_url}` : (k.image_url || (k.name.includes('Budi') ? '/images/kedai_budi.png' : k.name.includes('Sari') ? '/images/kedai_sari.png' : k.name.includes('Joko') ? '/images/kedai_joko.png' : '/images/kedai_bakso.png'))}
+                      src={k.image_url?.startsWith('/uploads/') ? `${API_URL}${k.image_url}` : (k.image_url || (k.name.includes('Budi') ? '/images/kedai_budi.png' : k.name.includes('Sari') ? '/images/kedai_sari.png' : k.name.includes('Joko') ? '/images/kedai_joko.png' : '/images/kedai_bakso.png'))}
                       alt={k.name}
                       onError={(e) => { e.target.src = '/images/kedai_bakso.png'; }}
                     />

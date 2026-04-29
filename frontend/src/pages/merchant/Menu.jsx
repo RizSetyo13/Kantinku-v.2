@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../../components/Sidebar';
 import api from '../../api/axios';
+import { API_URL } from '../../config';
 import { toast } from '../../components/Toast';
 import { Utensils, Coffee, Pizza, Edit, Trash2, X } from 'lucide-react';
 
@@ -109,7 +110,7 @@ export default function MerchantMenu() {
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         <img 
-                          src={m.image_url?.startsWith('/uploads/') ? `http://localhost:5000${m.image_url}` : (m.image_url || '/images/menu_nasi_goreng.png')} 
+                          src={m.image_url?.startsWith('/uploads/') ? `${API_URL}${m.image_url}` : (m.image_url || '/images/menu_nasi_goreng.png')} 
                           alt="" 
                           style={{ width: 40, height: 40, borderRadius: 8, objectFit: 'cover' }} 
                           onError={(e) => { e.target.src = '/images/menu_nasi_goreng.png'; }}
