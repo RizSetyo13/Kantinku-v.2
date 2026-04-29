@@ -162,7 +162,7 @@ async function seed() {
           ['Ketoprak Telur', 'Ketoprak with telur dadar and bumbu kacang', '/images/menu_ketoprak_premium.png'],
           ['Empal Sapi Goreng', 'Empal sapi gurih dan empuk', '/images/menu_empal_sapi_premium.png'],
           ['Soto Betawi Asli', 'Soto daging sapi kuah santan khas Betawi', '/images/menu_soto_betawi_premium.png'],
-          ['Lontong Sayur Betawi', 'Lontong sayur labu siam dengan kerupuk merah', '/images/menu_lontong_sayur_betawi_premium.jpg'],
+          ['Lontong Sayur Betawi', 'Lontong sayur labu siam dengan kerupuk merah', '/images/menu_lontong_sayur_premium.png'],
           ['Nasi Goreng Betawi', 'Nasi goreng dengan bumbu rempah khas Betawi', '/images/menu_nasi_goreng_kampung_premium.png'],
           ['Ayam Bakar Madu', 'Ayam bakar manis dengan sambal limau', '/images/menu_ayam_bakar_madu_premium.png']
         ],
