@@ -1005,3 +1005,55 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   from { transform: translateY(100%) scale(0.9); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
 }
+
+/* Custom Dropdown for Login Demo */
+.dropdown-menu-custom {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: 240px;
+  background: rgba(30, 30, 35, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow: hidden;
+  animation: slideDownCustom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDownCustom {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header-custom {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+}
+
+.dropdown-item-custom {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropdown-item-custom:hover {
+  background: rgba(255, 107, 53, 0.1);
+  color: var(--primary);
+  padding-left: 1.25rem;
+}

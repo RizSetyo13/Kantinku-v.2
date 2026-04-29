@@ -217,16 +217,19 @@ INSERT INTO kantin_areas (name, description, location_hint) VALUES
 INSERT INTO users (name, email, password, role, phone) VALUES
 ('Super Admin',    'admin@kantinku.id',    '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin',    '081234567890'),
 ('Pak Budi',       'budi@kantinku.id',     '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'merchant', '081234567891'),
-('Bu Sari',        'sari@kantinku.id',     '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'merchant', '081234567892'),
+('Bu Sri',         'sri@kantinku.id',      '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'merchant', '081234567892'),
 ('Mas Joko',       'joko@kantinku.id',     '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'merchant', '081234567893'),
-('Andi Mahasiswa', 'andi@student.ac.id',   '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', '081234567894'),
-('Siti Mahasiswi', 'siti@student.ac.id',   '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', '081234567895');
+('Pak Cemara',     'cemara@kantinku.id',   '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'merchant', '081234567894'),
+('Pak Hendra',     'hendra@kantinku.id',   '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'merchant', '081234567895'),
+('Andi Mahasiswa', 'andi@student.ac.id',   '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', '081234567896'),
+('Siti Mahasiswi', 'siti@student.ac.id',   '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'customer', '081234567897');
 
 INSERT INTO kedai (merchant_id, kantin_area_id, name, description, open_time, close_time, is_active, is_verified, rating, review_count, image_url) VALUES
-(2, 5, 'Warung Pak Budi',  'Masakan rumahan yang lezat dan terjangkau',               '07:00:00', '16:00:00', 1, 1, 4.5, 24, 'https://picsum.photos/seed/warung1/400/300'),
-(3, 1, 'Dapur Bu Sari',    'Masakan Jawa otentik dengan bumbu rempah pilihan',         '08:00:00', '15:00:00', 1, 1, 4.8, 56, 'https://picsum.photos/seed/warung2/400/300'),
-(4, 3, 'Mie Ayam Mas Joko','Mie ayam spesial dengan kuah kental',                     '09:00:00', '17:00:00', 1, 1, 4.3, 18, 'https://picsum.photos/seed/warung3/400/300'),
-(2, 2, 'Bakso Selera',     'Bakso jumbo dengan kuah segar bumbu rempah',              '10:00:00', '18:00:00', 1, 1, 4.6, 31, 'https://picsum.photos/seed/warung4/400/300');
+(2, 5, 'Warung Pak Budi',  'Masakan rumahan yang lezat dan terjangkau',               '07:00:00', '16:00:00', 1, 1, 4.8, 24, '/images/kedai_budi_premium.png'),
+(3, 1, 'Dapur Bu Sri',     'Masakan Jawa otentik dengan bumbu rempah pilihan',        '08:00:00', '15:00:00', 1, 1, 4.7, 56, '/images/kedai_sari.png'),
+(4, 3, 'Mie Ayam Mas Joko','Mie ayam spesial dengan kuah kental',                     '09:00:00', '17:00:00', 1, 1, 4.5, 18, '/images/kedai_joko.png'),
+(5, 4, 'Bakso Selera Cemara','Bakso jumbo dengan kuah segar bumbu rempah',            '10:00:00', '18:00:00', 1, 1, 4.6, 31, '/images/kedai_bakso.png'),
+(6, 5, 'Nasi Uduk Pak Hendra','Nasi uduk gurih khas Betawi lengkap',                  '06:30:00', '14:00:00', 1, 1, 4.9, 61, '/images/kedai_budi.png');
 
 INSERT INTO menu_items (kedai_id, name, description, price, category, is_available, image_url) VALUES
 (1, 'Nasi Goreng Spesial', 'Nasi goreng dengan telur, ayam, dan sayuran', 18000, 'makanan', 1, 'https://picsum.photos/seed/menu1/300/200'),

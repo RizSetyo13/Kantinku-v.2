@@ -42,9 +42,9 @@ async function seed() {
       INSERT INTO users (id, name, email, password, role, phone) VALUES
       (1,  'Super Admin',    'admin@kantinku.id',    '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'admin',    '081234567890'),
       (2,  'Pak Budi',       'budi@kantinku.id',     '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567891'),
-      (3,  'Bu Sri',         'sari@kantinku.id',     '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567892'),
+      (3,  'Bu Sri',         'sri@kantinku.id',      '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567892'),
       (4,  'Mas Joko',       'joko@kantinku.id',     '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567893'),
-      (5,  'Pak Cemara',     'dewi@kantinku.id',     '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567894'),
+      (5,  'Pak Cemara',     'cemara@kantinku.id',   '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567894'),
       (6,  'Pak Hendra',     'hendra@kantinku.id',   '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567895'),
       (7,  'Bu Ratna',       'ratna@kantinku.id',    '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567896'),
       (8,  'Mas Fajar',      'fajar@kantinku.id',    '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'merchant', '081234567897'),
@@ -70,9 +70,9 @@ async function seed() {
       { 
         kedai: 1, 
         makanan: [
-          ['Nasi Ayam Bakar Kecap', 'Ayam bakar bumbu kecap meresap dengan sambal terasi', '/images/warung pak budi/nasi ayam bakar kecap.png'],
-          ['Nasi Gudeg Spesial', 'Gudeg nangka manis dengan krecek pedas dan telur', '/images/warung pak budi/nasi gudeg spesial.png'],
-          ['Rawon Daging Sapi', 'Rawon kuah hitam pekat dengan daging sapi empuk', '/images/warung pak budi/rawon daging sapi.png'],
+          ['Nasi Ayam Bakar Kecap', 'Ayam bakar bumbu kecap meresap dengan sambal terasi', '/images/images/warung pak budi/nasi ayam bakar kecap.png'],
+          ['Nasi Gudeg Spesial', 'Gudeg nangka manis dengan krecek pedas dan telur', '/images/images/warung pak budi/nasi gudeg spesial.png'],
+          ['Rawon Daging Sapi', 'Rawon kuah hitam pekat dengan daging sapi empuk', '/images/images/warung pak budi/rawon daging sapi.png'],
           ['Nasi Goreng Kampung', 'Nasi goreng gurih dengan telur mata sapi', '/images/menu_nasi_goreng_kampung_premium.png'],
           ['Soto Ayam Lamongan', 'Soto ayam kuah kuning kental dengan koya', '/images/menu_soto_ayam_lamongan_premium.jpg'],
           ['Ayam Penyet Pedas', 'Ayam goreng dipenyet dengan sambal korek', '/images/menu_ayam_penyet_ijo_premium.png'],
@@ -92,19 +92,19 @@ async function seed() {
       {
         kedai: 2,
         makanan: [
-          ['Ayam Goreng Lengkuas', 'Ayam goreng dengan taburan serundeng lengkuas', '/images/dapur bu sri/ayam goreng lengkuas.png'],
-          ['Gudeg Jogja', 'Gudeg asli Jogja dengan cita rasa manis gurih', '/images/dapur bu sri/gudeg joga.png'],
-          ['Rawon Setan', 'Rawon pedas nikmat dengan telur asin dan tauge', '/images/dapur bu sri/rawon setan.png'],
+          ['Ayam Goreng Lengkuas', 'Ayam goreng dengan taburan serundeng lengkuas', '/images/images/dapur bu sri/ayam goreng lengkuas.png'],
+          ['Gudeg Jogja', 'Gudeg asli Jogja dengan cita rasa manis gurih', '/images/images/dapur bu sri/gudeg joga.png'],
+          ['Rawon Setan', 'Rawon pedas nikmat dengan telur asin dan tauge', '/images/images/dapur bu sri/rawon setan.png'],
           ['Ayam Bakar Madu', 'Ayam bakar bumbu madu yang meresap ke tulang', '/images/menu_ayam_bakar_premium.jpg'],
           ['Soto Daging Sapi', 'Soto daging sapi kuah bening segar berempah', '/images/menu_soto_betawi_premium.png'],
           ['Nasi Goreng Spesial', 'Nasi goreng dengan bakso, sosis, dan telur', '/images/menu_nasi_goreng_kampung_premium.png'],
           ['Ikan Bakar Premium', 'Ikan bakar bumbu rempah pilihan', '/images/menu_ikan_bakar_premium.png']
         ],
         minuman: [
-          ['Es Kelapa Muda', 'Air kelapa muda murni dengan es batu', '/images/dapur bu sri/es kelapa muda.png'],
-          ['Iced Teh Tarik', 'Teh tarik creamy dengan busa melimpah', '/images/dapur bu sri/iced teh tarik.png'],
-          ['Mango Juice', 'Jus mangga harum manis kental', '/images/dapur bu sri/mango juice.png'],
-          ['Wedang Jahe', 'Minuman jahe hangat untuk stamina tubuh', '/images/dapur bu sri/wedang jahe.png'],
+          ['Es Kelapa Muda', 'Air kelapa muda murni dengan es batu', '/images/images/dapur bu sri/es kelapa muda.png'],
+          ['Iced Teh Tarik', 'Teh tarik creamy dengan busa melimpah', '/images/images/dapur bu sri/iced teh tarik.png'],
+          ['Mango Juice', 'Jus mangga harum manis kental', '/images/images/dapur bu sri/mango juice.png'],
+          ['Wedang Jahe', 'Minuman jahe hangat untuk stamina tubuh', '/images/images/dapur bu sri/wedang jahe.png'],
           ['Es Jeruk Nipis', 'Jeruk nipis segar kaya vitamin C', '/images/menu_es_jeruk_nipis_betawi_premium.jpg'],
           ['Jus Alpukat', 'Jus alpukat mentega segar', '/images/menu_jus_alpukat_premium.jpg'],
           ['Air Mineral', 'Air mineral dingin segar', '/images/menu_air_mineral_premium.jpg']
@@ -114,20 +114,20 @@ async function seed() {
       {
         kedai: 3,
         makanan: [
-          ['Bihun Ayam Jamur', 'Bihun lembut dengan topping ayam jamur spesial', '/images/mie ayam mas joko/bihun ayam jamur.png'],
-          ['Bakso Urat Mas Joko', 'Bakso urat asli Wonogiri dengan kuah kaldu sapi', '/images/mie ayam mas joko/bakso urat mas joko.png'],
-          ['Soto Ayam Spesial', 'Soto ayam dengan suwiran ayam melimpah', '/images/mie ayam mas joko/soto ayam spesial.png'],
+          ['Bihun Ayam Jamur', 'Bihun lembut dengan topping ayam jamur spesial', '/images/images/mie ayam mas joko/bihun ayam jamur.png'],
+          ['Bakso Urat Mas Joko', 'Bakso urat asli Wonogiri dengan kuah kaldu sapi', '/images/images/mie ayam mas joko/bakso urat mas joko.png'],
+          ['Soto Ayam Spesial', 'Soto ayam dengan suwiran ayam melimpah', '/images/images/mie ayam mas joko/soto ayam spesial.png'],
           ['Mie Ayam Wonogiri', 'Mie ayam kenyal dengan bumbu khas Wonogiri', '/images/menu_mie_ayam_wonogiri_premium.jpg'],
           ['Mie Ayam Pangsit', 'Mie ayam dengan pangsit goreng renyah', '/images/menu_mie_ayam_pangsit_premium.png'],
           ['Mie Goreng Seafood', 'Mie goreng dengan udang dan cumi segar', '/images/menu_nasi_goreng_kampung_premium.png'],
           ['Kwetiau Siram Sapi', 'Kwetiau kuah kental dengan daging sapi', '/images/menu_kwetiau_siram_premium.jpg']
         ],
         minuman: [
-          ['Es Sirup Melon', 'Sirup melon hijau segar dengan selasih', '/images/mie ayam mas joko/Es Sirup Melon.png'],
-          ['Air Mineral', 'Air mineral kemasan 600ml', '/images/mie ayam mas joko/air mineral.png'],
-          ['Es Jeruk Nipis Madu', 'Minuman segar jeruk nipis dengan madu asli', '/images/mie ayam mas joko/es jeruk nipis madu.png'],
-          ['Kopi Hitam Mantap', 'Kopi hitam robusta murni tanpa gula', '/images/mie ayam mas joko/kopi hitam mantap.png'],
-          ['Teh Botol Sosro', 'Teh dalam kemasan botol dingin', '/images/mie ayam mas joko/teh botol sosro.png'],
+          ['Es Sirup Melon', 'Sirup melon hijau segar dengan selasih', '/images/images/mie ayam mas joko/Es Sirup Melon.png'],
+          ['Air Mineral', 'Air mineral kemasan 600ml', '/images/images/mie ayam mas joko/air mineral.png'],
+          ['Es Jeruk Nipis Madu', 'Minuman segar jeruk nipis dengan madu asli', '/images/images/mie ayam mas joko/es jeruk nipis madu.png'],
+          ['Kopi Hitam Mantap', 'Kopi hitam robusta murni tanpa gula', '/images/images/mie ayam mas joko/kopi hitam mantap.png'],
+          ['Teh Botol Sosro', 'Teh dalam kemasan botol dingin', '/images/images/mie ayam mas joko/teh botol sosro.png'],
           ['Es Teh Manis', 'Teh manis dingin klasik', '/images/menu_es_teh_premium.png'],
           ['Es Jeruk Peras', 'Jeruk peras murni segar', '/images/menu_es_jeruk_nipis_betawi_premium.jpg']
         ]
@@ -136,18 +136,18 @@ async function seed() {
       {
         kedai: 4,
         makanan: [
-          ['Bakso Urat Besar', 'Bakso urat ukuran besar dengan kaldu sapi mantap', '/images/bakso selera cemara/bakso urat besar.png'],
-          ['Bakso Telur Puyuh', 'Bakso isi telur puyuh dengan kuah bening gurih', '/images/bakso selera cemara/bakso telur puyuh.png'],
-          ['Bakso Mercon', 'Bakso isi sambal mercon yang meledak di mulut', '/images/bakso selera cemara/bakso mercon.png'],
-          ['Mie Bakso Komplit', 'Campuran mie kuning, bihun, dan 5 butir bakso', '/images/bakso selera cemara/mie bakso komplit.png'],
-          ['Soto Ayam', 'Soto ayam dengan taburan koya yang gurih', '/images/bakso selera cemara/soto ayam.png'],
+          ['Bakso Urat Besar', 'Bakso urat ukuran besar dengan kaldu sapi mantap', '/images/images/bakso selera cemara/bakso urat besar.png'],
+          ['Bakso Telur Puyuh', 'Bakso isi telur puyuh dengan kuah bening gurih', '/images/images/bakso selera cemara/bakso telur puyuh.png'],
+          ['Bakso Mercon', 'Bakso isi sambal mercon yang meledak di mulut', '/images/images/bakso selera cemara/bakso mercon.png'],
+          ['Mie Bakso Komplit', 'Campuran mie kuning, bihun, dan 5 butir bakso', '/images/images/bakso selera cemara/mie bakso komplit.png'],
+          ['Soto Ayam', 'Soto ayam dengan taburan koya yang gurih', '/images/images/bakso selera cemara/soto ayam.png'],
           ['Nasi Ayam Geprek', 'Ayam geprek crispy dengan sambal bawang', '/images/menu_ayam_penyet_ijo_premium.png'],
           ['Tahu Bakso Goreng', 'Tahu isi bakso isi 4 pcs dengan saus sambal', '/images/menu_tahu_bakso_premium.jpg']
         ],
         minuman: [
-          ['Cincau', 'Cincau hitam dengan santan dan gula merah', '/images/bakso selera cemara/cincau.png'],
-          ['Iced Susu Cokelat', 'Susu coklat segar bertenaga', '/images/bakso selera cemara/iced susu cokelat.png'],
-          ['Tomato Juice', 'Jus tomat asli kaya lycopene', '/images/bakso selera cemara/tomato juice.png'],
+          ['Cincau', 'Cincau hitam dengan santan dan gula merah', '/images/images/bakso selera cemara/cincau.png'],
+          ['Iced Susu Cokelat', 'Susu coklat segar bertenaga', '/images/images/bakso selera cemara/iced susu cokelat.png'],
+          ['Tomato Juice', 'Jus tomat asli kaya lycopene', '/images/images/bakso selera cemara/tomato juice.png'],
           ['Es Campur Cemara', 'Es campur spesial dengan kelapa muda', '/images/menu_es_campur_premium.jpg'],
           ['Es Teh Manis', 'Teh manis dingin klasik', '/images/menu_es_teh_premium.png'],
           ['Es Jeruk Nipis', 'Jeruk nipis segar kaya vitamin C', '/images/menu_es_jeruk_nipis_betawi_premium.jpg'],
@@ -180,8 +180,8 @@ async function seed() {
       {
         kedai: 6,
         makanan: [
-          ['Ikan Bakar Cianjur', 'Ikan nila bakar bumbu kecap pedas manis', '/images/warung bu ratna/ikan bakar cianjur.png'],
-          ['Sayur Asam Segar', 'Sayur asem segar dengan kacang dan jagung', '/images/warung bu ratna/sayur asam segar.png'],
+          ['Ikan Bakar Cianjur', 'Ikan nila bakar bumbu kecap pedas manis', '/images/images/warung bu ratna/ikan bakar cianjur.png'],
+          ['Sayur Asam Segar', 'Sayur asem segar dengan kacang dan jagung', '/images/images/warung bu ratna/sayur asam segar.png'],
           ['Ayam Penyet Sambal Ijo', 'Ayam goreng dipenyet dengan sambal ijo', '/images/menu_ayam_penyet_ijo_premium.png'],
           ['Nasi Timbel Komplit', 'Nasi timbel daun pisang dengan ikan asin', '/images/menu_nasi_timbel_premium.jpg'],
           ['Karedok Bandung', 'Sayuran mentah segar dengan bumbu kacang', '/images/menu_karedok_premium.jpg'],
@@ -189,9 +189,9 @@ async function seed() {
           ['Sate Maranggi', 'Sate sapi bumbu maranggi yang legendaris', '/images/menu_sate_madura_premium.png']
         ],
         minuman: [
-          ['Bandrek Susu Hangat', 'Minuman jahe susu hangat penambah stamina', '/images/warung bu ratna/bandrek susu hangat.png'],
-          ['Es Doger Spesial', 'Es doger dengan tape, ketan hitam, dan kelapa', '/images/warung bu ratna/es doger spesial.png'],
-          ['Jus Alpukat Cokelat', 'Jus alpukat dengan topping susu coklat kental', '/images/warung bu ratna/jus alpukat cokelat.png'],
+          ['Bandrek Susu Hangat', 'Minuman jahe susu hangat penambah stamina', '/images/images/warung bu ratna/bandrek susu hangat.png'],
+          ['Es Doger Spesial', 'Es doger dengan tape, ketan hitam, dan kelapa', '/images/images/warung bu ratna/es doger spesial.png'],
+          ['Jus Alpukat Cokelat', 'Jus alpukat dengan topping susu coklat kental', '/images/images/warung bu ratna/jus alpukat cokelat.png'],
           ['Es Cendol Bandung', 'Es cendol dengan nangka dan gula merah', '/images/menu_es_cendol_premium.jpg'],
           ['Es Jeruk Peras', 'Jeruk peras segar dingin', '/images/menu_es_jeruk_nipis_betawi_premium.jpg'],
           ['Teh Botol Sosro', 'Teh dalam kemasan botol dingin', '/images/menu_es_teh_premium.png'],
@@ -202,17 +202,17 @@ async function seed() {
       {
         kedai: 7,
         makanan: [
-          ['Nasi Bakar', 'Nasi bakar gurih dengan isi ikan peda dan kemangi', '/images/kedai mas fajar/nasi bakar.png'],
-          ['Pasta Bolognese', 'Pasta spaghetti dengan saus daging sapi cincang', '/images/kedai mas fajar/pasta bolognese.png'],
-          ['Sandwich Tuna Mayo', 'Roti gandum isi tuna dan sayuran segar', '/images/kedai mas fajar/sandwich tuna mayo.png'],
+          ['Nasi Bakar', 'Nasi bakar gurih dengan isi ikan peda dan kemangi', '/images/images/kedai mas fajar/nasi bakar.png'],
+          ['Pasta Bolognese', 'Pasta spaghetti dengan saus daging sapi cincang', '/images/images/kedai mas fajar/pasta bolognese.png'],
+          ['Sandwich Tuna Mayo', 'Roti gandum isi tuna dan sayuran segar', '/images/images/kedai mas fajar/sandwich tuna mayo.png'],
           ['Rice Bowl Teriyaki', 'Nasi bowl ayam teriyaki dengan topping wijen', '/images/menu_rice_bowl_teriyaki_premium.png'],
           ['Ayam Geprek Mozzarella', 'Ayam geprek pedas dengan lelehan keju mozzarella', '/images/menu_ayam_geprek_mozarella_premium.jpg'],
           ['Mie Goreng Spesial', 'Mie goreng telur dengan sayuran dan bakso', '/images/menu_mie_ayam_wonogiri_premium.jpg'],
           ['Sate Ayam Madura', 'Sate ayam isi 10 tusuk bumbu kacang', '/images/menu_sate_madura_premium.png']
         ],
         minuman: [
-          ['Iced Americano', 'Espresso kopi arabika dengan air dingin/panas', '/images/kedai mas fajar/iced americano.png'],
-          ['Mango Smoothies', 'Smoothie buah mangga asli dengan yogurt', '/images/kedai mas fajar/mango smoothies.png'],
+          ['Iced Americano', 'Espresso kopi arabika dengan air dingin/panas', '/images/images/kedai mas fajar/iced americano.png'],
+          ['Mango Smoothies', 'Smoothie buah mangga asli dengan yogurt', '/images/images/kedai mas fajar/mango smoothies.png'],
           ['Thai Tea Creamy', 'Teh khas Thailand dengan susu evaporasi', '/images/menu_thai_tea_premium.jpg'],
           ['Matcha Latte Dingin', 'Bubuk matcha premium dengan susu segar', '/images/menu_matcha_latte_premium.png'],
           ['Es Teh Manis', 'Teh manis dingin klasik', '/images/menu_es_teh_premium.png'],

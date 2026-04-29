@@ -25,8 +25,19 @@ app.use((req, res) => res.status(404).json({ message: 'Endpoint tidak ditemukan'
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Internal server error' });
+  console.error('SERVER ERROR:', err);
+  
+  if (err instanceof require('multer').MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ message: 'File terlalu besar. Maksimal 5MB.' });
+    }
+    return res.status(400).json({ message: `Gagal upload: ${err.message}` });
+  }
+
+  res.status(err.status || 500).json({ 
+    message: err.message || 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
 });
 
 const PORT = process.env.PORT || 5000;

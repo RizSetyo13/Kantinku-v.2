@@ -103,8 +103,8 @@ const getMenu = async (req, res) => {
 
 // POST /api/merchant/menu
 const createMenu = async (req, res) => {
-  const { kedai_id, name, description, price, category } = req.body;
-  
+  const { kedai_id, name, description, price, category, is_available } = req.body;
+
   // Jika ada file terupload, gunakan path file tersebut
   const image_url = req.file ? `/uploads/menu/${req.file.filename}` : (req.body.image_url || null);
 
@@ -112,9 +112,11 @@ const createMenu = async (req, res) => {
     const [kedai] = await pool.query(
       'SELECT id FROM kedai WHERE id = ? AND merchant_id = ?', [kedai_id, req.user.id]);
     if (kedai.length === 0) return res.status(403).json({ message: 'Tidak bisa menambah menu ke kedai orang lain' });
+    const availableVal = (is_available === 'true' || is_available === true || is_available === 1 || is_available === '1') ? 1 : 0;
+
     const [result] = await pool.query(
-      'INSERT INTO menu_items (kedai_id, name, description, price, category, image_url) VALUES (?,?,?,?,?,?)',
-      [kedai_id, name, description, price, category, image_url]);
+      'INSERT INTO menu_items (kedai_id, name, description, price, category, image_url, is_available) VALUES (?,?,?,?,?,?,?)',
+      [kedai_id, name, description, price, category, image_url, availableVal]);
     res.status(201).json({ id: result.insertId, message: 'Menu berhasil ditambahkan' });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
@@ -138,14 +140,24 @@ const updateMenu = async (req, res) => {
       image_url = `/uploads/menu/${req.file.filename}`;
       // 2. Hapus file lama jika ada dan formatnya lokal (/uploads/...)
       if (oldImage && oldImage.startsWith('/uploads/')) {
-        const oldPath = path.join(__dirname, '../../', oldImage);
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+        // Gunakan .replace(/^\//, '') untuk membuang leading slash agar path.join bekerja benar di semua OS
+        const oldPath = path.join(__dirname, '../../', oldImage.replace(/^\//, ''));
+        try {
+          if (fs.existsSync(oldPath)) {
+            fs.unlinkSync(oldPath);
+            console.log('Old image deleted:', oldPath);
+          }
+        } catch (e) {
+          console.error('Failed to delete old image:', e.message);
+        }
       }
     }
 
+    const availableVal = (is_available === 'true' || is_available === true || is_available === 1 || is_available === '1') ? 1 : 0;
+
     await pool.query(
       'UPDATE menu_items SET name=?, description=?, price=?, category=?, image_url=?, is_available=? WHERE id=?',
-      [name, description, price, category, image_url, is_available, req.params.id]);
+      [name, description, price, category, image_url, availableVal, req.params.id]);
     res.json({ message: 'Menu berhasil diperbarui' });
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
@@ -180,7 +192,7 @@ const getOrders = async (req, res) => {
   try {
     const [kedai] = await pool.query('SELECT id FROM kedai WHERE merchant_id = ?', [req.user.id]);
     if (kedai.length === 0) return res.json([]);
-    
+
     const ids = kedai.map(k => k.id);
     // Gunakan placeholder (?) untuk keamanan dan konsistensi tipe data
     const [rows] = await pool.query(`
@@ -222,9 +234,9 @@ const updateOrderStatus = async (req, res) => {
 
     const order = rows[0];
     const allowedTransitions = {
-      pending:      ['diterima', 'ditolak'],
-      diterima:     ['diproses', 'ditolak'],
-      diproses:     ['siap_diambil'],
+      pending: ['diterima', 'ditolak'],
+      diterima: ['diproses', 'ditolak'],
+      diproses: ['siap_diambil'],
       siap_diambil: ['selesai'],
     };
     if (!allowedTransitions[order.current_status]?.includes(status)) {
@@ -243,11 +255,11 @@ const updateOrderStatus = async (req, res) => {
     }
 
     const notifMessages = {
-      diterima:     `✅ Pesanan ${order.order_code} diterima! Nomor: ${orderNumber}`,
-      diproses:     `👨‍🍳 Pesanan ${order.order_code} sedang diproses`,
+      diterima: `✅ Pesanan ${order.order_code} diterima! Nomor: ${orderNumber}`,
+      diproses: `👨‍🍳 Pesanan ${order.order_code} sedang diproses`,
       siap_diambil: `🎯 Pesanan ${order.order_code} SIAP DIAMBIL!`,
-      selesai:      `✅ Pesanan ${order.order_code} selesai. Terima kasih!`,
-      ditolak:      `❌ Maaf, pesanan ${order.order_code} ditolak oleh kedai`,
+      selesai: `✅ Pesanan ${order.order_code} selesai. Terima kasih!`,
+      ditolak: `❌ Maaf, pesanan ${order.order_code} ditolak oleh kedai`,
     };
     await notifyCustomer(order.customer_id, req.params.id, notifMessages[status]);
 
@@ -264,14 +276,14 @@ const getStats = async (req, res) => {
   try {
     const [kedai] = await pool.query('SELECT id FROM kedai WHERE merchant_id = ?', [req.user.id]);
     if (kedai.length === 0) return res.json({ today: 0, week: 0, month: 0, revenue: 0, pending: 0 });
-    
+
     const ids = kedai.map(k => k.id);
 
-    const [[{ today }]]   = await pool.query(
+    const [[{ today }]] = await pool.query(
       `SELECT COUNT(*) AS today FROM orders WHERE kedai_id IN (?) AND DATE(created_at) = CURDATE()`, [ids]);
-    const [[{ week }]]    = await pool.query(
+    const [[{ week }]] = await pool.query(
       `SELECT COUNT(*) AS week FROM orders WHERE kedai_id IN (?) AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)`, [ids]);
-    const [[{ month }]]   = await pool.query(
+    const [[{ month }]] = await pool.query(
       `SELECT COUNT(*) AS month FROM orders WHERE kedai_id IN (?) AND MONTH(created_at) = MONTH(NOW()) AND YEAR(created_at) = YEAR(NOW())`, [ids]);
     const [[{ revenue }]] = await pool.query(
       `SELECT COALESCE(SUM(total_price),0) AS revenue FROM orders WHERE kedai_id IN (?) AND status='selesai'`, [ids]);

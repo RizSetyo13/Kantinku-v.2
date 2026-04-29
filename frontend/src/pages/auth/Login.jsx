@@ -7,6 +7,7 @@ import { Layers, Crown, Store, GraduationCap, Mail, Lock, LogIn } from 'lucide-r
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
+  const [showMerchant, setShowMerchant] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -52,16 +53,59 @@ export default function Login() {
         <div className="card">
           {/* Demo accounts */}
           <div style={{ background: 'var(--bg-card2)', borderRadius: 'var(--radius-md)', padding: '1.25rem', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.03)' }}>
-            <div style={{ fontSize: '0.85rem', color: '#fff', marginBottom: '0.75rem', fontWeight: 600 }}>Demo Akun (Pilih salah satu opsi dari 3 role dibawah ini)</div>
+            <div style={{ fontSize: '0.85rem', color: '#fff', marginBottom: '0.75rem', fontWeight: 600 }}>Demo Akun (Pilih Salah Satu Opsi 3 Role dibawah ini)</div>
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
               <button onClick={() => fillDemo('admin')} className="btn btn-sm btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Crown size={14} />
                 Admin
               </button>
-              <button onClick={() => fillDemo('merchant')} className="btn btn-sm btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <Store size={14} />
-                Merchant
-              </button>
+              
+              <div style={{ position: 'relative' }}>
+                <button 
+                  type="button"
+                  onClick={() => setShowMerchant(!showMerchant)}
+                  className="btn btn-sm btn-secondary"
+                  style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                >
+                  <Store size={14} />
+                  Merchant
+                </button>
+
+                {showMerchant && (
+                  <>
+                    <div 
+                      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 90 }} 
+                      onClick={() => setShowMerchant(false)}
+                    />
+                    <div className="dropdown-menu-custom">
+                      <div className="dropdown-header-custom">Pilih Kedai Demo</div>
+                      {[
+                        { id: 'budi', name: 'Warung Pak Budi' },
+                        { id: 'sri', name: 'Dapur Bu Sri' },
+                        { id: 'joko', name: 'Mie Ayam Mas Joko' },
+                        { id: 'cemara', name: 'Bakso Selera Cemara' },
+                        { id: 'hendra', name: 'Nasi Uduk Pak Hendra' },
+                        { id: 'ratna', name: 'Warung Bu Ratna' },
+                        { id: 'fajar', name: 'Kedai Mas Fajar' }
+                      ].map((k) => (
+                        <button
+                          key={k.id}
+                          type="button"
+                          className="dropdown-item-custom"
+                          onClick={() => {
+                            setForm({ email: `${k.id}@kantinku.id`, password: 'password' });
+                            setShowMerchant(false);
+                          }}
+                        >
+                          <Store size={12} style={{ opacity: 0.5 }} />
+                          {k.name}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
               <button onClick={() => fillDemo('customer')} className="btn btn-sm btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <GraduationCap size={14} />
                 Customer
