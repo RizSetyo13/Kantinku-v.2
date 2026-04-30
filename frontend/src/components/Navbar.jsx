@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { Store, Search, Wallet, User, LogOut, ShoppingCart } from 'lucide-react';
+import { Store, Search, Wallet, User, LogOut, ShoppingCart, Menu, X } from 'lucide-react';
 import NotificationBell from './NotificationBell';
 
 export default function Navbar({ onSearch }) {
@@ -10,6 +10,7 @@ export default function Navbar({ onSearch }) {
   const { count } = useCart();
   const navigate = useNavigate();
   const [searchVal, setSearchVal] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => { logout(); navigate('/'); };
   const handleSearch = (e) => {
@@ -19,12 +20,23 @@ export default function Navbar({ onSearch }) {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-brand">
-        <div className="brand-icon">
-          <Store size={18} />
-        </div>
-        <span>Kantin<em>Ku</em></span>
-      </Link>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <Link to="/" className="navbar-brand">
+          <div className="brand-icon">
+            <Store size={18} />
+          </div>
+          <span>Kantin<em>Ku</em></span>
+        </Link>
+
+        {/* Mobile Menu Toggle Button */}
+        <button 
+          className="mobile-menu-btn" 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          style={{ display: 'none', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
       {onSearch !== undefined && (
         <div className="navbar-search">
@@ -37,7 +49,7 @@ export default function Navbar({ onSearch }) {
         </div>
       )}
 
-      <div className="navbar-actions">
+      <div className={`navbar-actions ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <Link to="/" className="navbar-link">Home</Link>
         {user ? (
           <>
@@ -70,17 +82,17 @@ export default function Navbar({ onSearch }) {
                 title="Klik untuk Top Up KantinPay"
               >
                 <Wallet size={14} />
-                KantinPay
+                <span className="hide-on-mobile">KantinPay</span>
               </div>
             )}
 
-            <div style={{ padding: '0.5rem 0.75rem', background: 'var(--bg-card)', borderRadius: 'var(--radius-md)', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="user-profile-badge" style={{ padding: '0.5rem 0.75rem', background: 'var(--bg-card)', borderRadius: 'var(--radius-md)', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <User size={16} style={{ color: 'var(--primary)' }} />
-              {user.name.split(' ')[0]}
+              <span className="hide-on-mobile">{user.name.split(' ')[0]}</span>
             </div>
             <button className="btn btn-secondary btn-sm" onClick={handleLogout} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <LogOut size={14} />
-              Logout
+              <span className="hide-on-mobile">Logout</span>
             </button>
           </>
         ) : (
@@ -93,7 +105,7 @@ export default function Navbar({ onSearch }) {
           <div className="cart-btn-wrap">
             <button className="btn btn-secondary btn-sm" onClick={() => navigate('/cart')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <ShoppingCart size={18} />
-              Cart {count > 0 && <span className="cart-badge">{count}</span>}
+              <span className="hide-on-mobile">Cart</span> {count > 0 && <span className="cart-badge">{count}</span>}
             </button>
           </div>
         )}

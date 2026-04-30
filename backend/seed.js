@@ -52,6 +52,13 @@ async function seed() {
       (10, 'Siti Mahasiswi', 'siti@student.ac.id',   '$2b$10$PgRDJdzVRPFclpSTgvZbWuzEgnSx8b9qzmq4yLVpZRuSW8EyeARuu', 'customer', '081234567899')
     `);
 
+    // Create wallets for customers
+    await connection.query(`
+      INSERT INTO wallets (user_id, saldo) VALUES 
+      (9, 0),
+      (10, 0)
+    `);
+
     // 3. Kedai — Using premium branding images
     await connection.query(`
       INSERT INTO kedai (id, merchant_id, kantin_area_id, name, description, open_time, close_time, is_active, is_verified, rating, review_count, image_url) VALUES

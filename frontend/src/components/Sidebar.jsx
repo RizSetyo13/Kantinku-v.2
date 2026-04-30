@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/axios';
-import { LayoutDashboard, Users, Store, MapPin, ClipboardList, MessageSquare, Menu, Star, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Store, MapPin, ClipboardList, MessageSquare, Menu, Star, LogOut, X } from 'lucide-react';
 
 const adminLinks = [
   { to: '/admin',                icon: <LayoutDashboard size={20} />, label: 'Dashboard',         end: true },
@@ -25,6 +25,7 @@ export default function Sidebar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [pendingCount, setPendingCount] = useState(0);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
     if (user?.role === 'merchant') {
@@ -47,12 +48,38 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
+    <>
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={() => setIsMobileOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 90, backdropFilter: 'blur(2px)' }}
+        />
+      )}
+
+      {/* Mobile Toggle Button */}
+      <button 
+        className="sidebar-toggle-btn" 
+        onClick={() => setIsMobileOpen(!isMobileOpen)}
+        style={{ position: 'fixed', top: '1rem', left: '1rem', zIndex: 95, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', padding: '0.5rem', color: 'var(--text-primary)' }}
+      >
+        <Menu size={20} />
+      </button>
+
+      <aside className={`sidebar ${isMobileOpen ? 'mobile-open' : ''}`}>
       <div className="sidebar-logo">
         <div className="logo-icon" style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Store size={20} color="#fff" />
         </div>
         <span>Kantin<em>Ku</em></span>
+        <button 
+          className="sidebar-close-btn"
+          onClick={() => setIsMobileOpen(false)}
+          style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--text-muted)' }}
+        >
+          <X size={20} />
+        </button>
       </div>
 
       <nav>
@@ -63,6 +90,7 @@ export default function Sidebar() {
             to={link.to}
             end={link.end}
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            onClick={() => setIsMobileOpen(false)}
           >
             <span className="icon">{link.icon}</span>
             <span style={{flex: 1}}>{link.label}</span>
@@ -95,5 +123,6 @@ export default function Sidebar() {
         </div>
       </div>
     </aside>
+    </>
   );
 }
