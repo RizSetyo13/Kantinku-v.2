@@ -125,6 +125,7 @@ CREATE TABLE IF NOT EXISTS ulasan_website (
   id         INT AUTO_INCREMENT PRIMARY KEY,
   nama       VARCHAR(100) NOT NULL,
   no_telp    VARCHAR(20)  NOT NULL,
+  rating     TINYINT DEFAULT 5 CHECK (rating BETWEEN 1 AND 5),
   keterangan TEXT         NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
