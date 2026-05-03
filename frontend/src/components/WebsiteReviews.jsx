@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
 import { toast } from './Toast';
-import { MessageSquare, X, Edit, Send, Phone, Star } from 'lucide-react';
+import { MessageSquare, X, Edit, Send, Phone, Star, Trash2 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function WebsiteReviews() {
+  const { user } = useAuth();
   const [reviews, setReviews]     = useState([]);
   const [showForm, setShowForm]   = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -14,6 +16,17 @@ export default function WebsiteReviews() {
   };
 
   useEffect(() => { loadReviews(); }, []);
+
+  const handleDeleteReview = async (id) => {
+    if (!window.confirm('Hapus ulasan ini secara permanen?')) return;
+    try {
+      await api.delete(`/admin/website-reviews/${id}`);
+      toast.success('Ulasan berhasil dihapus');
+      loadReviews();
+    } catch {
+      toast.error('Gagal menghapus ulasan');
+    }
+  };
 
   const handleChange = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }));
 
@@ -205,10 +218,22 @@ export default function WebsiteReviews() {
                       </span>
                       <span>•</span>
                       <span>{timeAgo(r.created_at)}</span>
-                      <span style={{ color: '#ffb400', marginLeft: 'auto', display: 'flex', gap: '2px' }}>
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={12} fill={i < (r.rating || 5) ? 'currentColor' : 'none'} style={{ color: i < (r.rating || 5) ? '#ffb400' : 'var(--border)' }} />
-                        ))}
+                      <span style={{ color: '#ffb400', marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div style={{ display: 'flex', gap: '2px' }}>
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={12} fill={i < (r.rating || 5) ? 'currentColor' : 'none'} style={{ color: i < (r.rating || 5) ? '#ffb400' : 'var(--border)' }} />
+                          ))}
+                        </div>
+                        {user?.role === 'admin' && (
+                          <button
+                            onClick={() => handleDeleteReview(r.id)}
+                            className="btn btn-danger btn-sm"
+                            style={{ padding: '2px 4px', background: 'transparent', color: 'var(--danger)', border: 'none', marginLeft: '4px' }}
+                            title="Hapus Ulasan (Admin)"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        )}
                       </span>
                     </div>
                   </div>
