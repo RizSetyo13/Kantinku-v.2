@@ -55,6 +55,17 @@ export default function AdminWebsiteReviews() {
     }
   };
 
+  const handleDeleteReview = async (id) => {
+    if (!window.confirm('Hapus ulasan ini secara permanen?')) return;
+    try {
+      await api.delete(`/admin/website-reviews/${id}`);
+      toast.success('Ulasan berhasil dihapus');
+      load();
+    } catch {
+      toast.error('Gagal menghapus ulasan');
+    }
+  };
+
   const avatarBg = (name) =>
     `hsl(${(name.charCodeAt(0) * 37) % 360}, 55%, 45%)`;
 
@@ -116,8 +127,19 @@ export default function AdminWebsiteReviews() {
                         {timeAgo(r.created_at)}
                       </span>
                     </div>
+                    </div>
                   </div>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>#{r.id}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>#{r.id}</span>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+                      onClick={() => handleDeleteReview(r.id)}
+                      title="Hapus Ulasan"
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* Isi ulasan */}

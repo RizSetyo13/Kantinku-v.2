@@ -240,11 +240,22 @@ const deleteWebsiteReviewReply = async (req, res) => {
   }
 };
 
+// DELETE /api/admin/website-reviews/:id
+const deleteWebsiteReview = async (req, res) => {
+  try {
+    const [result] = await pool.query('DELETE FROM ulasan_website WHERE id = ?', [req.params.id]);
+    if (result.affectedRows === 0) return res.status(404).json({ message: 'Ulasan tidak ditemukan' });
+    res.json({ message: 'Ulasan berhasil dihapus' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
 module.exports = {
   getDashboard,
   getUsers, createUser, updateUser, deleteUser,
   getKedai, verifyKedai, deleteKedai,
   getKantin, createKantin, updateKantin, deleteKantin,
   getOrders,
-  getWebsiteReviews, replyWebsiteReview, deleteWebsiteReviewReply
+  getWebsiteReviews, replyWebsiteReview, deleteWebsiteReviewReply, deleteWebsiteReview
 };

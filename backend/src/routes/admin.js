@@ -32,5 +32,6 @@ router.get('/orders', ctrl.getOrders);
 router.get('/website-reviews', ctrl.getWebsiteReviews);
 router.post('/website-reviews/:id/reply', ctrl.replyWebsiteReview);
 router.delete('/website-reviews/:id/reply', ctrl.deleteWebsiteReviewReply);
+router.delete('/website-reviews/:id', ctrl.deleteWebsiteReview);
 
 module.exports = router;
